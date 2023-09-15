@@ -1,0 +1,7 @@
+.container {
+  width: 100vw;
+  height: 10vh;
+  margin: 0 auto;
+  color: blue;
+  text-align: center;
+}
