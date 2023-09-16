@@ -6,18 +6,26 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("🚀 ~ file: index.ts:9 ~ req:", req.method);
   await connectToDatabase();
   if (req.method === "GET") {
-    const locations = await Location.find();
-    console.log("🚀 ~ file: index.ts:8 ~ GET ~ locations:", locations);
-    res.status(200).json({ locations });
+    try {
+      const locations = await Location.find();
+      res.status(200).json({ locations });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .json({ message: "error fetching locations", error: error });
+    }
   }
 
   if (req.method === "POST") {
-    const { name, company, type, address } = req.body;
-    await Location.create({ name, company, type, address });
-
-    res.status(201).json({ message: "success", location: req.body });
+    try {
+      const resp = await Location.create(req.body);
+      res.status(201).json({ message: "success", resp });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "error posting location", error: error });
+    }
   }
 }

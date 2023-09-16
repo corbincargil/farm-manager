@@ -10,9 +10,9 @@ function Navbar() {
       <li>
         <Link href="/locations">Locations</Link>
       </li>
-      {/* <li>
-        <Link href="/blog/hello-world">Blog Post</Link>
-      </li> */}
+      <li>
+        <Link href="/companies">Companies</Link>
+      </li>
     </ul>
   );
 }

@@ -1,0 +1,30 @@
+.mainContainer {
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: clamp(250px, 90%, 700px);
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+}
+
+.inputContainer .innerContainer {
+  width: clamp(120px, 100%, 550px);
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer .inputElement {
+  margin: 4px;
+  padding: 0px;
+}
