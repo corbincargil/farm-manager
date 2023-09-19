@@ -13,6 +13,9 @@ function Navbar() {
       <li>
         <Link href="/companies">Companies</Link>
       </li>
+      <li>
+        <Link href="/equipment">Equipment</Link>
+      </li>
     </ul>
   );
 }
