@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import LocationForm from "../../../components/forms/LocationForm";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import { connectToDatabase } from "../../../lib/mongodb";
 import Location from "../../../models/Location";
 import {
@@ -12,8 +12,7 @@ import {
 } from "../../../types/locationTypes";
 
 export default function Locations({ locations }: LocationsPageProps) {
-  const [formValues, setFormValues] =
-    useState<LocationFormValues>(defaultFormValues);
+  const [formValues, setFormValues] = useState<LocationFormValues>(defaultFormValues);
   const [showForm, setShowForm] = useState(false);
 
   const postLocation = async (body: any) => {
@@ -26,7 +25,8 @@ export default function Locations({ locations }: LocationsPageProps) {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     const body = {
       name: formValues.name,
       type: formValues.type,

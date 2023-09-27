@@ -29,7 +29,7 @@ export interface LocationFormProps {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   formValues: LocationFormValues;
   setFormValues: React.Dispatch<React.SetStateAction<LocationFormValues>>;
-  handleSubmit: () => Promise<void>;
+  handleSubmit: (e: any) => Promise<void>;
 }
 
 export interface LocationFormValues {

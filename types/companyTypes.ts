@@ -37,6 +37,15 @@ export interface CompanyDetailsPageProps {
   company: CompanyInterface;
 }
 
+export interface CompanyFormProps {
+  showForm: boolean;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  formValues: CompanyFormValues;
+  setFormValues: React.Dispatch<React.SetStateAction<CompanyFormValues>>;
+  //todo: fix the any below for handleSubmit
+  handleSubmit: (e: any) => Promise<void>;
+}
+
 export const defaultCompanyFormValues: CompanyFormValues = {
   name: "",
   locations: null,

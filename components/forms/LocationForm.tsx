@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { LocationFormProps } from "../../types/locationTypes";
 import { CompanyInterface, placeholderCompany } from "../../types/companyTypes";
-import styles from "./LocationForm.module.css";
+import styles from "../../src/styles/LocationForm.module.css";
 import { Box } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import Modal from "@mui/material/Modal";
@@ -13,20 +13,16 @@ import handleValidity from "../../utils/handleValidity";
 import validator from "validator";
 
 function LocationForm(props: LocationFormProps) {
-  const { showForm, setShowForm, formValues, setFormValues, handleSubmit } =
-    props;
+  const { showForm, setShowForm, formValues, setFormValues, handleSubmit } = props;
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
   const [formValid, setFormValid] = useState<boolean>(false);
-  const [companyOptions, setCompanyOptions] = useState<CompanyInterface[]>([
-    placeholderCompany,
-  ]);
+  const [companyOptions, setCompanyOptions] = useState<CompanyInterface[]>([placeholderCompany]);
   const [useCoordinates, setUseCoordinates] = useState<boolean>(false);
 
   const handleClose = () => setShowForm(false);
 
   const handleCoordinateToggle = (e: any) => {
-    const checked = e.target.checked;
-    checked ? setUseCoordinates(true) : setUseCoordinates(false);
+    e.target.checked ? setUseCoordinates(true) : setUseCoordinates(false);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +30,6 @@ function LocationForm(props: LocationFormProps) {
     const value = e.target.value;
     switch (field) {
       case "name":
-      case "company":
       case "streetAddress":
       case "city":
       case "state":

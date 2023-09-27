@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Link from "next/link";
-// import LocationForm from "../../../components/forms/LocationForm";
+import CompanyForm from "../../../components/forms/CompanyForm";
 import { connectToDatabase } from "../../../lib/mongodb";
 import Company from "../../../models/Company";
+import Button from "@mui/material/Button";
 import {
   CompaniesPageProps,
   CompanyInterface,
@@ -11,38 +12,36 @@ import {
 } from "../../../types/companyTypes";
 
 export default function Companies({ companies }: CompaniesPageProps) {
-  const [formValues, setFormValues] = useState<CompanyFormValues>(
-    defaultCompanyFormValues
-  );
+  const [formValues, setFormValues] = useState<CompanyFormValues>(defaultCompanyFormValues);
+  const [showForm, setShowForm] = useState(false);
 
-  //   const postLocation = async (body: any) => {
-  //     return await fetch("/api/v1/locations", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(body),
-  //     });
-  //   };
+  const postCompany = async (body: any) => {
+    return await fetch("/api/v1/companies", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+  };
 
-  //   const handleSubmit = async () => {
-  //     const body = {
-  //       name: formValues.name,
-  //       type: formValues.type,
-  //       company: formValues.company,
-  //       address: {
-  //         street_address: formValues.streetAddress,
-  //         street_address2: formValues.streetAddress2,
-  //         city: formValues.city,
-  //         state: formValues.state,
-  //         zip_code: formValues.zip,
-  //         longitude: formValues.longitude,
-  //         latitude: formValues.latitude,
-  //       },
-  //     };
-  //     await postLocation(body);
-  //     setFormValues(defaultFormValues);
-  //   };
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const body = {
+      name: formValues.name,
+      type: formValues.type,
+      locations: formValues.locations,
+      address: {
+        street_address: formValues.streetAddress,
+        street_address2: formValues.streetAddress2,
+        city: formValues.city,
+        state: formValues.state,
+        zip_code: formValues.zip,
+      },
+    };
+    await postCompany(body);
+    setFormValues(defaultCompanyFormValues);
+  };
 
   return (
     <>
@@ -56,11 +55,16 @@ export default function Companies({ companies }: CompaniesPageProps) {
           );
         })}
       </ul>
-      {/* <LocationForm
+      <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
+        Add New Company
+      </Button>
+      <CompanyForm
+        showForm={showForm}
+        setShowForm={setShowForm}
         formValues={formValues}
         setFormValues={setFormValues}
         handleSubmit={handleSubmit}
-      /> */}
+      />
     </>
   );
 }
