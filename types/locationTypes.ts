@@ -25,6 +25,8 @@ export interface LocationDetailsPageProps {
 }
 
 export interface LocationFormProps {
+  showForm: boolean;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   formValues: LocationFormValues;
   setFormValues: React.Dispatch<React.SetStateAction<LocationFormValues>>;
   handleSubmit: () => Promise<void>;
