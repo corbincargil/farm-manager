@@ -6,13 +6,15 @@ import { ErrorBoundary } from "react-error-boundary";
 export default function Layout({ children }: any) {
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.layout}>
         <Navbar />
         <ErrorBoundary fallback={<div>Something went wrong</div>}>
-          <main className={styles.main}>{children}</main>
+          <div className={styles.contentContainer}>
+            <main className={styles.main}>{children}</main>
+            <Footer />
+          </div>
         </ErrorBoundary>
       </div>
-      <Footer />
     </>
   );
 }

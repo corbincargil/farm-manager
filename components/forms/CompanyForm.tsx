@@ -56,6 +56,7 @@ function CompanyForm(props: CompanyFormProps) {
     invalidFields.length ? setFormValid(false) : setFormValid(true);
   }, [invalidFields]);
 
+  //todo: add filter for current company's locations
   useEffect(() => {
     fetch("/api/v1/locations")
       .then((res) => res.json())

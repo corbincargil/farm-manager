@@ -4,6 +4,9 @@ import CompanyForm from "../../../components/forms/CompanyForm";
 import { connectToDatabase } from "../../../lib/mongodb";
 import Company from "../../../models/Company";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 import {
   CompaniesPageProps,
   CompanyInterface,
@@ -25,13 +28,14 @@ export default function Companies({ companies }: CompaniesPageProps) {
     });
   };
 
-  const handleSubmit = async (e: any) => {
+  //todo: add toast success/errors
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     const body = {
       name: formValues.name,
       type: formValues.type,
       locations: formValues.locations,
-      address: {
+      main_address: {
         street_address: formValues.streetAddress,
         street_address2: formValues.streetAddress2,
         city: formValues.city,
@@ -41,30 +45,35 @@ export default function Companies({ companies }: CompaniesPageProps) {
     };
     await postCompany(body);
     setFormValues(defaultCompanyFormValues);
+    setShowForm(false);
   };
 
   return (
     <>
-      <h1>Companies</h1>
-      <ul>
+      <Typography variant="h4" color="primary">
+        Companies
+      </Typography>
+      <List>
         {companies.map((c: CompanyInterface) => {
           return (
             <Link key={c.name} href={`/companies/${c._id}`}>
-              <li key={c.name}>{c.name}</li>
+              <ListItemText key={c.name}>{c.name}</ListItemText>
             </Link>
           );
         })}
-      </ul>
+      </List>
       <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
         Add New Company
       </Button>
-      <CompanyForm
-        showForm={showForm}
-        setShowForm={setShowForm}
-        formValues={formValues}
-        setFormValues={setFormValues}
-        handleSubmit={handleSubmit}
-      />
+      {showForm && (
+        <CompanyForm
+          showForm={showForm}
+          setShowForm={setShowForm}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </>
   );
 }

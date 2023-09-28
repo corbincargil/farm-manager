@@ -1,10 +1,7 @@
 .nav {
-  padding: 20px;
   height: 100%;
   color: black;
-  display: flex;
-  flex-direction: column;
-  width: 200px;
+  width: 240px;
   background-color: #9b9b9b;
   border-right: 1px solid #eaeaea;
   list-style: none;
@@ -14,38 +11,17 @@
   font-size: 1.5rem;
 }
 
+.menuItem {
+  width: 100%;
+}
+
+.menuItemSelected {
+  background-color: var(--background-color-selected);
+}
 .nav a {
   text-decoration: none;
-  color: black;
 }
-/*
-.nav > a {
-  margin: 8px 0;
-  text-decoration: none;
-  background: white;
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 12px 16px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-  color: #333;
-  border: 1px solid #eaeaea;
-  transition: all 0.125s ease;
-}*/
 
-/* 
-.nav > a:hover {
-  background-color: #eaeaea;
-} */
-
-/* .input {
-  margin: 32px 0;
-  text-decoration: none;
-  background: white;
-  border-radius: 4px;
-  border: 1px solid #eaeaea;
-  font-size: 14px;
-  padding: 8px 16px;
-  height: 28px;
-} */
+.nav a:hover {
+  background-color: var(--background-color-hover);
+}

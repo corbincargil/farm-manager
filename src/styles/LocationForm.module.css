@@ -3,14 +3,13 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  width: clamp(250px, 90%, 700px);
+  width: var(--form-container-width);
   align-items: center;
   border: 1px solid black;
   border-radius: 10px;
   position: absolute;
   top: 10vh;
-  /* todo: fix the horizontal location below by subtracting width */
-  left: calc(20%);
+  left: calc(50vw - var(--form-container-width) / 2);
   background-color: white;
 }
 

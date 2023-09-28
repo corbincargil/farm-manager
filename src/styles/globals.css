@@ -1,7 +1,8 @@
 :root {
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --form-container-width: clamp(250px, 90%, 700px);
+  --primary-color: red;
+  --background-color-hover: red;
+  --background-color-selected: rgba(252, 0, 0, 0.536);
 }
 
 * {

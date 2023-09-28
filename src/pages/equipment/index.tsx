@@ -2,6 +2,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { connectToDatabase } from "../../../lib/mongodb";
 import Equipment from "../../../models/Equipment";
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 // import {
 //   LocationInterface,
 //   LocationFormValues,
@@ -44,16 +47,18 @@ export default function EquipmentPage({ equipment }: any) {
 
   return (
     <>
-      <h1>Equipment</h1>
-      <ul>
+      <Typography variant="h4" color="primary">
+        Equipment
+      </Typography>
+      <List>
         {equipment.map((l: any) => {
           return (
             <Link key={l.serialNumber} href={`/equipment/${l._id}`}>
-              <li key={l.serialNumber}>{`${l.type} - ${l.serialNumber}`}</li>
+              <ListItemText key={l.serialNumber}>{`${l.type} - ${l.serialNumber}`}</ListItemText>
             </Link>
           );
         })}
-      </ul>
+      </List>
       {/* <LocationForm
         formValues={formValues}
         setFormValues={setFormValues}

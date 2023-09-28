@@ -4,6 +4,9 @@ import LocationForm from "../../../components/forms/LocationForm";
 import Button from "@mui/material/Button";
 import { connectToDatabase } from "../../../lib/mongodb";
 import Location from "../../../models/Location";
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItemText from "@mui/material/ListItemText";
 import {
   LocationInterface,
   LocationFormValues,
@@ -25,7 +28,8 @@ export default function Locations({ locations }: LocationsPageProps) {
     });
   };
 
-  const handleSubmit = async (e: any) => {
+  //todo: add toast success/errors
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     const body = {
       name: formValues.name,
@@ -43,20 +47,23 @@ export default function Locations({ locations }: LocationsPageProps) {
     };
     await postLocation(body);
     setFormValues(defaultFormValues);
+    setShowForm(false);
   };
 
   return (
     <>
-      <h1>Locations</h1>
-      <ul>
+      <Typography variant="h4" color="primary">
+        Locations
+      </Typography>
+      <List>
         {locations.map((l: LocationInterface) => {
           return (
             <Link key={l.name} href={`/locations/${l._id}`}>
-              <li key={l.name}>{l.name}</li>
+              <ListItemText key={l.name}>{l.name}</ListItemText>
             </Link>
           );
         })}
-      </ul>
+      </List>
       <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
         Add New Location
       </Button>
