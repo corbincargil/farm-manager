@@ -6,7 +6,6 @@ import { connectToDatabase } from "../../../lib/mongodb";
 import Location from "../../../models/Location";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
 import {
   LocationInterface,
   LocationFormValues,
