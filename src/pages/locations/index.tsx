@@ -59,13 +59,15 @@ export default function Locations({ locations }: LocationsPageProps) {
         {locations.map((l: LocationInterface) => {
           return (
             <Link key={l.name} href={`/locations/${l._id}`}>
-              <ListItemText key={l.name}>{l.name}</ListItemText>
+              <Typography color="text.primary" key={l.name}>
+                {l.name}
+              </Typography>
             </Link>
           );
         })}
       </List>
       <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
-        Add New Location
+        <Typography color="text.scondary">Add New Location</Typography>
       </Button>
       {showForm && (
         <LocationForm

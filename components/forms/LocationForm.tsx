@@ -70,8 +70,10 @@ function LocationForm(props: LocationFormProps) {
 
   return (
     <Modal open={showForm} className={styles.modal} onClose={handleClose}>
-      <div className={styles.mainContainer}>
-        <Typography variant="h4">New Location</Typography>
+      <Box className={styles.mainContainer} sx={{ backgroundColor: "background.paper" }}>
+        <Typography variant="h4" color="primary">
+          New Location
+        </Typography>
         <form className={styles.inputContainer} onSubmit={handleSubmit}>
           <Box className={styles.innerContainer}>
             <TextField
@@ -133,7 +135,9 @@ function LocationForm(props: LocationFormProps) {
               className={styles.inputElement}
             />
           </Box>
-          <Typography variant="h5">Address:</Typography>
+          <Typography variant="h5" color="primary">
+            Address:
+          </Typography>
           <FormControlLabel
             control={<Switch onChange={handleCoordinateToggle} />}
             label="Use coordinates"
@@ -210,7 +214,7 @@ function LocationForm(props: LocationFormProps) {
             Submit
           </Button>
         </form>
-      </div>
+      </Box>
     </Modal>
   );
 }

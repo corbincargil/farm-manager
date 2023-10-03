@@ -17,6 +17,11 @@ export const lightTheme = createTheme({
     action: {
       active: "rgba(252, 0, 0, 0.536)",
     },
+    text: { primary: "#000000", secondary: "#000000" },
+    background: {
+      default: "#ffffff",
+      paper: "#ffffff",
+    },
   },
   components: {
     // Name of the component
@@ -47,10 +52,9 @@ export const darkTheme = createTheme({
     action: {
       active: "rgba(252, 0, 0, 0.536)",
     },
-    text: { primary: "#ffffff" },
-
+    text: { primary: "#ffffff", secondary: "#ffffff" },
     background: {
-      default: "#6b6b6b",
+      default: "6b6b6b",
       paper: "#6b6b6b",
     },
   },
@@ -65,6 +69,13 @@ export const darkTheme = createTheme({
         root: {
           // Some CSS
           fontSize: "1rem",
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          color: "#ffffff",
         },
       },
     },

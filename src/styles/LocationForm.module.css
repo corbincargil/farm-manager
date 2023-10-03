@@ -5,12 +5,10 @@
   flex-direction: column;
   width: var(--form-container-width);
   align-items: center;
-  border: 1px solid black;
   border-radius: 10px;
   position: absolute;
   top: 10vh;
   left: calc(50vw - var(--form-container-width) / 2);
-  background-color: white;
 }
 
 .inputContainer {
