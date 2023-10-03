@@ -5,6 +5,9 @@
   background-color: #9b9b9b;
   border-right: 1px solid #eaeaea;
   list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .nav li {

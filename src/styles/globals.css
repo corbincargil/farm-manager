@@ -1,8 +1,14 @@
 :root {
   --form-container-width: clamp(250px, 90%, 700px);
   --primary-color: red;
-  --background-color-hover: red;
+  --button-bg-color-hover: red;
   --background-color-selected: rgba(252, 0, 0, 0.536);
+  --topbar-bg-color: white;
+  --transparent: rgba(255, 255, 255, 0);
+  --primary: #a70000;
+  --primary-dark: #2fff00;
+  --main-bg-color-dark: #6b6b6b;
+  --font-color-dark: #ffffff;
 }
 
 * {

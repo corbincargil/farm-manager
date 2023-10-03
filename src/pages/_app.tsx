@@ -1,19 +1,17 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "../../components/Layout";
-import { Inter } from "next/font/google";
-import theme from "../styles/theme";
+import { lightTheme, darkTheme } from "../styles/theme";
 import { ThemeProvider } from "@mui/material/styles";
-const inter = Inter({ subsets: ["latin"] });
+import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [mode, setMode] = useState<"light" | "dark">("dark");
   return (
-    <main className={inter.className}>
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
-    </main>
+    <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>
+      <Layout mode={mode} setMode={setMode}>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   );
 }

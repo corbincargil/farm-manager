@@ -1,9 +1,18 @@
-.layout {
+.layoutLight {
   margin: 0;
   padding: 0;
   height: 100vh;
   display: flex;
   justify-content: flex-start;
+}
+
+.layoutDark {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  background-color: rgb(101, 101, 101);
 }
 
 .contentContainer {
@@ -16,4 +25,5 @@
 .main {
   padding: 30px;
   width: 100%;
+  height: 100%;
 }
