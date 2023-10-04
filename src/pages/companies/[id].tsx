@@ -1,10 +1,7 @@
 import { useRouter } from "next/router";
 import Company from "../../../models/Company";
 import { connectToDatabase } from "../../../lib/mongodb";
-import {
-  CompanyDetailsPageProps,
-  ServerSideContext,
-} from "../../../types/companyTypes";
+import { CompanyDetailsPageProps, ServerSideContext } from "../../../types/companyTypes";
 
 export default function LocationDetails({ company }: CompanyDetailsPageProps) {
   const router = useRouter();

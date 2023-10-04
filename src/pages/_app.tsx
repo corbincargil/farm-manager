@@ -4,8 +4,9 @@ import Layout from "../../components/Layout";
 import { lightTheme, darkTheme } from "../styles/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [mode, setMode] = useState<"light" | "dark" | null>(null);
 
   const updateTheme = (event: MediaQueryListEvent) => {
@@ -22,10 +23,12 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>
-      <Layout mode={mode} setMode={setMode}>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <SessionProvider session={session}>
+      <ThemeProvider theme={mode === "light" ? lightTheme : darkTheme}>
+        <Layout mode={mode} setMode={setMode}>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }

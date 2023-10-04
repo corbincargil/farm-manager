@@ -29,6 +29,7 @@ export default function Companies({ companies }: CompaniesPageProps) {
   };
 
   //todo: add toast success/errors
+  //todo: can we move this to the Company form?
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     const body = {

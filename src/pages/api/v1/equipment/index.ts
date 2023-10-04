@@ -2,10 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../../../lib/mongodb";
 import Equipment from "../../../../../models/Equipment";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connectToDatabase();
   if (req.method === "GET") {
     const equipment = await Equipment.find();

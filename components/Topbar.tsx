@@ -9,8 +9,10 @@ import MenuItem from "@mui/material/MenuItem";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import Switch from "@mui/material/Switch";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 function Topbar() {
+  const { data: session } = useSession();
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<any>(null);
 
@@ -30,6 +32,10 @@ function Topbar() {
         </Button>
       </div>
       <Menu open={open} anchorEl={anchorEl} onClose={() => setOpen(false)} disablePortal>
+        {/* //todo: add name and theme preference to user model */}
+        {/* //todo: update layout for register & login pages, update register and login page styling */}
+        {/* //todo: update the way we are connecting to mongo, I don't think I need to connect every time I make a req */}
+        {session && <MenuItem disableRipple>{session.user?.email}</MenuItem>}
         <MenuItem disableRipple>
           <LightModeIcon />
           <Switch />

@@ -2,10 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../../../lib/mongodb";
 import Location from "../../../../../models/Location";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connectToDatabase();
   if (req.method === "GET") {
     try {
@@ -13,9 +10,7 @@ export default async function handler(
       res.status(200).json({ locations });
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .json({ message: "error fetching locations", error: error });
+      res.status(500).json({ message: "error fetching locations", error: error });
     }
   }
 

@@ -12,8 +12,10 @@ import {
   LocationsPageProps,
   defaultFormValues,
 } from "../../../types/locationTypes";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Locations({ locations }: LocationsPageProps) {
+  const { data: session } = useSession();
   const [formValues, setFormValues] = useState<LocationFormValues>(defaultFormValues);
   const [showForm, setShowForm] = useState(false);
 
@@ -49,34 +51,42 @@ export default function Locations({ locations }: LocationsPageProps) {
     setShowForm(false);
   };
 
+  if (session) {
+    return (
+      <>
+        <Typography variant="h4" color="primary">
+          Locations
+        </Typography>
+        <List>
+          {locations.map((l: LocationInterface) => {
+            return (
+              <Link key={l.name} href={`/locations/${l._id}`}>
+                <Typography color="text.primary" key={l.name}>
+                  {l.name}
+                </Typography>
+              </Link>
+            );
+          })}
+        </List>
+        <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
+          <Typography color="text.scondary">Add New Location</Typography>
+        </Button>
+        {showForm && (
+          <LocationForm
+            showForm={showForm}
+            setShowForm={setShowForm}
+            formValues={formValues}
+            setFormValues={setFormValues}
+            handleSubmit={handleSubmit}
+          />
+        )}
+      </>
+    );
+  }
   return (
     <>
-      <Typography variant="h4" color="primary">
-        Locations
-      </Typography>
-      <List>
-        {locations.map((l: LocationInterface) => {
-          return (
-            <Link key={l.name} href={`/locations/${l._id}`}>
-              <Typography color="text.primary" key={l.name}>
-                {l.name}
-              </Typography>
-            </Link>
-          );
-        })}
-      </List>
-      <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
-        <Typography color="text.scondary">Add New Location</Typography>
-      </Button>
-      {showForm && (
-        <LocationForm
-          showForm={showForm}
-          setShowForm={setShowForm}
-          formValues={formValues}
-          setFormValues={setFormValues}
-          handleSubmit={handleSubmit}
-        />
-      )}
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
     </>
   );
 }

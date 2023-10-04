@@ -8,9 +8,7 @@ interface ServerSideContext {
   };
 }
 
-export default function LocationDetails({
-  location,
-}: LocationDetailsPageProps) {
+export default function LocationDetails({ location }: LocationDetailsPageProps) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -25,9 +23,7 @@ export default function LocationDetails({
         Location Address:{" "}
         <ul>
           <li>{`${location?.address?.street_address}` || ""}</li>
-          {location?.address?.street_address2 && (
-            <li>{`${location?.address?.street_address2}`}</li>
-          )}
+          {location?.address?.street_address2 && <li>{`${location?.address?.street_address2}`}</li>}
           <li>{`${location?.address?.city}` || ""}</li>
           <li>{`${location?.address?.state}` || ""}</li>
           <li>{`${location?.address?.zip_code}` || ""}</li>

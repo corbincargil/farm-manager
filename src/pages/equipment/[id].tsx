@@ -1,14 +1,9 @@
 import { useRouter } from "next/router";
 import Equipment from "../../../models/Equipment";
-import { connectToDatabase } from "../../../lib/mongodb";
-import {
-  EquipmentDetailsPageProps,
-  ServerSideContext,
-} from "../../../types/equipmentTypes";
+import { connectToDatabase } from "../../../mongodb";
+import { EquipmentDetailsPageProps, ServerSideContext } from "../../../types/equipmentTypes";
 
-export default function EquipmentDetails({
-  equipment,
-}: EquipmentDetailsPageProps) {
+export default function EquipmentDetails({ equipment }: EquipmentDetailsPageProps) {
   const router = useRouter();
 
   if (router.isFallback) {
