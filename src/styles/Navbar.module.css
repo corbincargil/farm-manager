@@ -1,17 +1,44 @@
-.nav {
+.navLight {
   height: 100%;
   color: black;
   width: 240px;
-  background-color: #9b9b9b;
-  border-right: 1px solid #eaeaea;
+  background-color: #a0a0a0;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 48px;
   list-style: none;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.nav li {
-  font-size: 1.5rem;
+.navDark {
+  height: 100%;
+  color: var(--text-primary-darkTheme);
+  width: 240px;
+  background-color: #6c6c6c;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.nav div {
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  margin: 0;
+  padding: 0;
+}
+
+.navDark li,
+.navLight li {
+  margin: 0;
+  padding: 6px;
+  font-size: 1.2rem;
 }
 
 .menuItem {
@@ -19,12 +46,7 @@
 }
 
 .menuItemSelected {
-  background-color: var(--background-color-selected);
-}
-.nav a {
-  text-decoration: none;
-}
-
-.nav a:hover {
-  background-color: var(--background-color-hover);
+  color: var(--primary-contrastText-darkTheme);
+  box-shadow: inset rgba(0, 0, 0, 0.15) 0px 0px 2px 2px;
+  width: 100%;
 }

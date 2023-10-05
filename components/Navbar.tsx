@@ -6,6 +6,13 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import Switch from "@mui/material/Switch";
 import { useRouter } from "next/router";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+
+const menuItemSx = {
+  backgroundColor: "primary.light",
+  "&:hover": { backgroundColor: "primary.dark" },
+};
 
 function Navbar({ mode, setMode }: any) {
   const router = useRouter();
@@ -15,31 +22,37 @@ function Navbar({ mode, setMode }: any) {
   };
 
   return (
-    <div className={styles.nav}>
+    <div className={mode === "light" ? styles.navLight : styles.navDark}>
       <div>
         <Link href="/">
-          <MenuItem className={styles.menuItem}>Farm Manager</MenuItem>
+          <MenuItem className={styles.menuItem}>Farm Manager Logo</MenuItem>
         </Link>
         <Link href="/locations">
           <MenuItem
-            className={styles.menuItem}
-            sx={router.asPath.includes("/locations") ? { backgroundColor: "primary.light" } : {}}
+            className={
+              router.asPath.includes("/locations") ? styles.menuItemSelected : styles.menuItem
+            }
+            sx={router.asPath.includes("/locations") ? menuItemSx : {}}
           >
             Locations
           </MenuItem>
         </Link>
         <Link href="/companies">
           <MenuItem
-            className={styles.menuItem}
-            sx={router.asPath.includes("/companies") ? { backgroundColor: "primary.light" } : {}}
+            className={
+              router.asPath.includes("/companies") ? styles.menuItemSelected : styles.menuItem
+            }
+            sx={router.asPath.includes("/companies") ? menuItemSx : {}}
           >
             Companies
           </MenuItem>
         </Link>
         <Link href="/equipment">
           <MenuItem
-            className={styles.menuItem}
-            sx={router.asPath.includes("/equipment") ? { backgroundColor: "primary.light" } : {}}
+            className={
+              router.asPath.includes("/equipment") ? styles.menuItemSelected : styles.menuItem
+            }
+            sx={router.asPath.includes("/equipment") ? menuItemSx : {}}
           >
             Equipment
           </MenuItem>

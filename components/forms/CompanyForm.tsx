@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CompanyFormProps } from "../../types/companyTypes";
 import styles from "../../src/styles/LocationForm.module.css";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
@@ -66,8 +66,10 @@ function CompanyForm(props: CompanyFormProps) {
 
   return (
     <Modal open={showForm} className={styles.modal} onClose={handleClose}>
-      <div className={styles.mainContainer}>
-        <Typography variant="h4">New Company</Typography>
+      <Box className={styles.mainContainer} sx={{ backgroundColor: "background.paper" }}>
+        <Typography variant="h4" color="primary">
+          New Company
+        </Typography>
         <form className={styles.inputContainer} onSubmit={handleSubmit}>
           <Box className={styles.innerContainer}>
             <TextField
@@ -138,7 +140,9 @@ function CompanyForm(props: CompanyFormProps) {
               className={styles.inputElement}
             />
           </Box>
-          <Typography variant="h5">Address:</Typography>
+          <Typography variant="h5" color="primary">
+            Address:
+          </Typography>
           <Box className={styles.innerContainer}>
             <TextField
               id="streetAddress"
@@ -188,7 +192,7 @@ function CompanyForm(props: CompanyFormProps) {
             Submit
           </Button>
         </form>
-      </div>
+      </Box>
     </Modal>
   );
 }

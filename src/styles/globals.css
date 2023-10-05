@@ -1,12 +1,34 @@
 :root {
+  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~ keep ~~~~~~~~~~~~~~~~~~~~~~~~~~~**/
+  /** sizes **/
   --form-container-width: clamp(250px, 90%, 700px);
-  --primary-color: red;
+  --form-container-width-small: clamp(350px, 50%, 550px);
+
+  /** light **/
+  --primary-main-lightTheme: #4e7cab;
+  --secondary-main-lightTheme: #e10000;
+  --secondary-main-lightTheme: #3a90aa;
+  /* --secondary-light-lightTheme: #58b5d1;
+  --secondary-dark-lightTheme: #406386; */
+  --text-primary-lightTheme: #000000;
+  --primary-contrastText-lightTheme: #ffffff;
+  --bg-paper-lightTheme: #f8f8f8;
+
+  /** dark **/
+  --primary-main-darkTheme: #3ace19;
+  --primary-dark-darkTheme: #20b000;
+  --primary-contrastText-darkTheme: #000000;
+  --secondary-main-darkTheme: #492c12;
+  --secondary-light-darkTheme: #583b21;
+  --bg-default-darkTheme: #6b6b6b;
+  --bg-paper-darkTheme: #272321;
+  --text-primary-darkTheme: #ffffff;
+
+  /** ~~~~~~~~~~~~~~~~~~~~ update/remove ~~~~~~~~~~~~~~~~~~~~~~**/
   --button-bg-color-hover: red;
   --background-color-selected: rgba(252, 0, 0, 0.536);
   --topbar-bg-color: white;
   --transparent: rgba(255, 255, 255, 0);
-  --primary: #a70000;
-  --primary-dark: #2fff00;
   --main-bg-color-dark: #6b6b6b;
   --font-color-dark: #ffffff;
 }

@@ -51,10 +51,12 @@ export default function EquipmentPage({ equipment }: any) {
         Equipment
       </Typography>
       <List>
-        {equipment.map((l: any) => {
+        {equipment.map((e: any) => {
           return (
-            <Link key={l.serialNumber} href={`/equipment/${l._id}`}>
-              <ListItemText key={l.serialNumber}>{`${l.type} - ${l.serialNumber}`}</ListItemText>
+            <Link key={e.serialNumber} href={`/equipment/${e._id}`}>
+              <Typography color="text.primary" key={e.serialNumber}>
+                {`${e.type} - ${e.serialNumber}`}
+              </Typography>
             </Link>
           );
         })}

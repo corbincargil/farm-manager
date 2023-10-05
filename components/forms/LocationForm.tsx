@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { LocationFormProps } from "../../types/locationTypes";
 import { CompanyInterface, placeholderCompany } from "../../types/companyTypes";
 import styles from "../../src/styles/LocationForm.module.css";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import Switch from "@mui/material/Switch";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";

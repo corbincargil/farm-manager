@@ -58,13 +58,15 @@ export default function Companies({ companies }: CompaniesPageProps) {
         {companies.map((c: CompanyInterface) => {
           return (
             <Link key={c.name} href={`/companies/${c._id}`}>
-              <ListItemText key={c.name}>{c.name}</ListItemText>
+              <Typography color="text.primary" key={c.name}>
+                {c.name}
+              </Typography>
             </Link>
           );
         })}
       </List>
       <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
-        Add New Company
+        <Typography color="text.scondary">Add New Company</Typography>
       </Button>
       {showForm && (
         <CompanyForm
