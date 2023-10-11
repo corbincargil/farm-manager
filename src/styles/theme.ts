@@ -2,6 +2,17 @@ import { createTheme } from "@mui/material/styles";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
+declare module "@mui/material/styles" {
+  interface CustomTheme {
+    custom?: {
+      sustom?: string;
+    };
+  }
+
+  interface Theme extends CustomTheme {}
+  interface ThemeOptions extends CustomTheme {}
+}
+
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -52,7 +63,7 @@ export const darkTheme = createTheme({
     },
     text: { primary: "#ffffff", secondary: "#ffffff" },
     background: {
-      default: "6b6b6b",
+      default: "#6b6b6b",
       paper: "#272321",
     },
   },

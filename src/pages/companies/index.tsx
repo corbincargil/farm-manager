@@ -1,12 +1,13 @@
 import { useState } from "react";
-import Link from "next/link";
+import styles from "../../styles/TablePage.module.css";
 import CompanyForm from "../../../components/forms/CompanyForm";
 import { connectToDatabase } from "../../../lib/mongodb";
 import Company from "../../../models/Company";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
+import Box from "@mui/material/Box";
+import CompanyDatagrid from "../../../components/datagrid/CompanyDatagrid";
+import { ErrorBoundary } from "react-error-boundary";
 import {
   CompaniesPageProps,
   CompanyInterface,
@@ -50,24 +51,15 @@ export default function Companies({ companies }: CompaniesPageProps) {
   };
 
   return (
-    <>
-      <Typography variant="h4" color="primary">
-        Companies
-      </Typography>
-      <List>
-        {companies.map((c: CompanyInterface) => {
-          return (
-            <Link key={c.name} href={`/companies/${c._id}`}>
-              <Typography color="text.primary" key={c.name}>
-                {c.name}
-              </Typography>
-            </Link>
-          );
-        })}
-      </List>
-      <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
-        <Typography color="text.scondary">Add New Company</Typography>
-      </Button>
+    <Box className={styles.main}>
+      <Box className={styles.titleContainer}>
+        <Typography variant="h4" color="primary">
+          Companies
+        </Typography>
+        <Button variant="contained" onClick={() => setShowForm((prev) => !prev)}>
+          <Typography color="text.scondary">Add New Company</Typography>
+        </Button>
+      </Box>
       {showForm && (
         <CompanyForm
           showForm={showForm}
@@ -77,7 +69,12 @@ export default function Companies({ companies }: CompaniesPageProps) {
           handleSubmit={handleSubmit}
         />
       )}
-    </>
+      <ErrorBoundary fallback={<div>Failed to load CompanyDatagrid</div>}>
+        <Box className={styles.datagridContainer}>
+          <CompanyDatagrid companies={companies} />
+        </Box>
+      </ErrorBoundary>
+    </Box>
   );
 }
 
