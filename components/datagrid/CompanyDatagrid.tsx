@@ -1,13 +1,27 @@
-import {
-  DataGridPro,
-  GridColDef,
-  GridValueGetterParams,
-  GridEventListener,
-} from "@mui/x-data-grid-pro";
+import { DataGridPro, GridColDef, GridRowParams, GridActionsCellItem } from "@mui/x-data-grid-pro";
 import { CompaniesPageProps, CompanyInterface } from "../../types/companyTypes";
 import { useRouter } from "next/router";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 const columns: GridColDef[] = [
+  {
+    field: "actions",
+    type: "actions",
+    disableReorder: true,
+    getActions: (params: GridRowParams) => [
+      <GridActionsCellItem
+        icon={<EditIcon />}
+        onClick={() => console.log("item edited")}
+        label="Edit"
+      />,
+      <GridActionsCellItem
+        icon={<DeleteIcon />}
+        onClick={() => console.log("item edited")}
+        label="Delete"
+      />,
+    ],
+  },
   { field: "_id", headerName: "ID", width: 200 },
   {
     field: "name",
@@ -39,6 +53,7 @@ function CompanyDatagrid({ companies }: CompaniesPageProps) {
       rows={companies}
       getRowId={(c: CompanyInterface) => c._id}
       onRowClick={(c) => router.push(`/companies/${c.id}`)}
+      // sx={styles}
     ></DataGridPro>
   );
 }

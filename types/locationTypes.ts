@@ -13,7 +13,8 @@ export interface LocationInterface {
   _id: string;
   name: string;
   type: string;
-  company: ObjectId;
+  company: { id: ObjectId; name: string };
+  preferCoordinates: boolean;
 }
 
 export interface LocationsPageProps {
@@ -29,12 +30,13 @@ export interface LocationFormProps {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   formValues: LocationFormValues;
   setFormValues: React.Dispatch<React.SetStateAction<LocationFormValues>>;
-  handleSubmit: (e: any) => Promise<void>;
+  formMode: "Add" | "Edit";
 }
 
 export interface LocationFormValues {
   name: string;
-  company: string;
+  companyName: string;
+  companyId: ObjectId | string;
   type: string | null;
   streetAddress: string;
   streetAddress2: string;
@@ -43,11 +45,14 @@ export interface LocationFormValues {
   city: string;
   state: string;
   zip: string;
+  preferCoordinates: boolean;
+  _id: string | undefined;
 }
 
 export const defaultFormValues: LocationFormValues = {
   name: "",
-  company: "",
+  companyName: "",
+  companyId: "",
   type: null,
   streetAddress: "",
   streetAddress2: "",
@@ -56,4 +61,11 @@ export const defaultFormValues: LocationFormValues = {
   city: "",
   state: "",
   zip: "",
+  preferCoordinates: false,
+  _id: undefined,
 };
+
+export interface LocationDataGridProps {
+  locations: LocationInterface[];
+  onEdit: any;
+}

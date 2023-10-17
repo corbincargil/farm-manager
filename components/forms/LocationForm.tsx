@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { LocationFormProps } from "../../types/locationTypes";
+import { FormEventHandler, useEffect, useState } from "react";
+import { LocationFormProps, defaultFormValues } from "../../types/locationTypes";
 import { CompanyInterface, placeholderCompany } from "../../types/companyTypes";
 import styles from "../../src/styles/LocationForm.module.css";
 import Box from "@mui/material/Box";
@@ -12,14 +12,49 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import handleValidity from "../../utils/handleValidity";
 import validator from "validator";
 
+//todo: figure out someting better to do for the crud operations here
+const getCompanies = async () => {
+  const res = await fetch("/api/v1/companies", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return res.json();
+};
+
+const postLocation = async (body: any) => {
+  await fetch("/api/v1/locations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+};
+
+const putLocation = async (id: string, body: any) => {
+  await fetch(`/api/v1/locations/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+};
+
 function LocationForm(props: LocationFormProps) {
-  const { showForm, setShowForm, formValues, setFormValues, handleSubmit } = props;
+  const { showForm, setShowForm, formValues, setFormValues, formMode } = props;
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
   const [formValid, setFormValid] = useState<boolean>(false);
   const [companyOptions, setCompanyOptions] = useState<CompanyInterface[]>([placeholderCompany]);
   const [useCoordinates, setUseCoordinates] = useState<boolean>(false);
 
-  const handleClose = () => setShowForm(false);
+  const handleClose = () => {
+    //todo: use local storage for form values if the "add" form is closed and re-opened
+    setFormValues(defaultFormValues);
+    setShowForm(false);
+  };
 
   const handleCoordinateToggle = (e: any) => {
     e.target.checked ? setUseCoordinates(true) : setUseCoordinates(false);
@@ -57,9 +92,46 @@ function LocationForm(props: LocationFormProps) {
     setFormValues({ ...formValues, [field]: value });
   };
 
+  //todo: add toast success/errors
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const body = {
+      name: formValues.name,
+      type: formValues.type,
+      company: { id: formValues.companyId, name: formValues.companyName },
+      address: {
+        street_address: formValues.streetAddress,
+        street_address2: formValues.streetAddress2,
+        city: formValues.city,
+        state: formValues.state,
+        zip_code: formValues.zip,
+        longitude: formValues.longitude,
+        latitude: formValues.latitude,
+      },
+      preferCoordinates: useCoordinates ?? false,
+    };
+    if (formMode === "Add") {
+      await postLocation(body);
+    } else {
+      await putLocation(formValues._id || "", body);
+    }
+    setFormValues(defaultFormValues);
+    setShowForm(false);
+    const data = await getCompanies();
+    setCompanyOptions(data.companies);
+  };
+
   useEffect(() => {
     invalidFields.length ? setFormValid(false) : setFormValid(true);
   }, [invalidFields]);
+
+  useEffect(() => {
+    // console.log(
+    //   "🚀 ~ file: LocationForm.tsx:114 ~ useEffect ~ formValues.preferCoordinates:",
+    //   formValues.preferCoordinates
+    // );
+    formValues.preferCoordinates ? setUseCoordinates(true) : setUseCoordinates(false);
+  }, [formValues.preferCoordinates]);
 
   useEffect(() => {
     fetch("/api/v1/companies")
@@ -72,7 +144,7 @@ function LocationForm(props: LocationFormProps) {
     <Modal open={showForm} className={styles.modal} onClose={handleClose}>
       <Box className={styles.mainContainer} sx={{ backgroundColor: "background.paper" }}>
         <Typography variant="h4" color="primary">
-          New Location
+          {formMode === "Add" ? "New Location" : "Edit Location"}
         </Typography>
         <form className={styles.inputContainer} onSubmit={handleSubmit}>
           <Box className={styles.innerContainer}>
@@ -98,6 +170,11 @@ function LocationForm(props: LocationFormProps) {
                   error={invalidFields.includes("company")}
                 />
               )}
+              value={
+                companyOptions.find((c) => {
+                  return c._id === formValues.companyId;
+                }) || null
+              }
               onChange={(e, newValue) => {
                 handleValidity({
                   isValid: !validator.isEmpty(newValue?._id.trim() || ""),
@@ -106,7 +183,11 @@ function LocationForm(props: LocationFormProps) {
                   invalidFields,
                   setInvalidFields,
                 });
-                setFormValues({ ...formValues, company: newValue?._id || "" });
+                setFormValues({
+                  ...formValues,
+                  companyName: newValue?.name || "",
+                  companyId: newValue?._id || "",
+                });
               }}
               className={styles.inputElement}
             />
@@ -139,7 +220,7 @@ function LocationForm(props: LocationFormProps) {
             Address:
           </Typography>
           <FormControlLabel
-            control={<Switch onChange={handleCoordinateToggle} />}
+            control={<Switch onChange={handleCoordinateToggle} checked={useCoordinates ?? false} />}
             label="Use coordinates"
           />
           {useCoordinates ? (

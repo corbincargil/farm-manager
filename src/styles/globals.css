@@ -49,3 +49,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+div[style*="position: absolute; pointer-events: none; color: rgba(130, 130, 130, 0.62); z-index: 100000; width: 100%; text-align: center; bottom: 50%; right: 0px; letter-spacing: 5px; font-size: 24px;"] {
+  display: none;
+}

@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 const LocationSchema = new Schema({
   name: String,
   type: String,
-  company: ObjectId,
+  company: { id: ObjectId, name: String },
   address: {
     street_address: String,
     street_address2: String,
@@ -14,9 +14,9 @@ const LocationSchema = new Schema({
     longitude: String,
     latitude: String,
   },
+  preferCoordinates: Boolean,
 });
 
-const Location =
-  mongoose.models.Location || mongoose.model("Location", LocationSchema);
+const Location = mongoose.models.Location || mongoose.model("Location", LocationSchema);
 
 export default Location;
